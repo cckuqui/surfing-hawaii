@@ -27,8 +27,8 @@ def welcome():
         f"/api/v1.0/precipitation<br/>"
         f"/api/v1.0/stations<br/>"
         f"/api/v1.0/tobs<br/>"
-        f'/api/v1.0/<start><br/>'
-        f'/api/v1.0/<start>/<end><br/>')
+        f'/api/v1.0/[start date in yyyy-mm-dd format]<br/>'
+        f'/api/v1.0/[start date in yyyy-mm-dd format]/[end date in yyyy-mm-dd format]<br/>')
 
 # Convert the query results to a dictionary using date as the key and prcp as the value.
 # Return the JSON representation of your dictionary.
@@ -79,7 +79,7 @@ def tobs():
 # Return a JSON list of the minimum temperature, the average temperature, and the max temperature for a given start or start-end range.
 # When given the start only, calculate TMIN, TAVG, and TMAX for all dates greater than and equal to the start date.
 # When given the start and the end date, calculate the TMIN, TAVG, and TMAX for dates between the start and end date inclusive.
-@app.route('/api/v1.0/<start>')
+@app.route('/api/v1.0/<start_date>')
 def start(start_date):
     session = Session(engine)
     start = session.query(Measurement.date, func.min(Measurement.tobs), func.max(Measurement.tobs), func.avg(Measurement.tobs)).\
@@ -91,7 +91,7 @@ def start(start_date):
         dic_start[s[0]] = s[1]
     return jsonify(dic_start)
 
-@app.route('/api/v1.0/<start>/<end>')
+@app.route('/api/v1.0/<start_date>/<end_date>')
 def start_end(start_date, end_date):
     session = Session(engine)
     end = session.query(Measurement.date, func.min(Measurement.tobs), func.max(Measurement.tobs), func.avg(Measurement.tobs)).\
