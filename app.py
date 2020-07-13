@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, render_template, request
+from flask import Flask, jsonify, render_template, request, redirect
 import numpy as np
 import pandas as pd
 import datetime as dt
@@ -23,8 +23,8 @@ Station = base.classes.station
 def welcome():
     return render_template("index.html")
 
-# Convert the query results to a dictionary using date as the key and prcp as the value.
-# Return the JSON representation of your dictionary.
+# Query results to a dictionary using date as the key and prcp as the value.
+# JSON representation of dictionary.
 @app.route("/api/precipitation")
 def prcp():
     session = Session(engine)
@@ -36,7 +36,7 @@ def prcp():
         dic_prcp[p[0]] = p[1]
     return jsonify(dic_prcp)
 
-# Return a JSON list of stations from the dataset.
+# JSON list of stations from the dataset.
 @app.route('/api/stations')
 def station():
     session = Session(engine)
@@ -47,9 +47,8 @@ def station():
         dic_station[s[0]] = s[1]
     return jsonify(dic_station)
 
-
 # Query the dates and temperature observations of the most active station for the last year of data.
-# Return a JSON list of temperature observations (TOBS) for the previous year.
+# JSON list of temperature observations (TOBS) for the previous year.
 @app.route('/api/tobs')
 def tobs():
     session = Session(engine)
@@ -69,6 +68,7 @@ def tobs():
         dic_lastyear[l[0]] = l[1]
     return jsonify(dic_lastyear)
 
+# Retrive start date define by user
 @app.route('/start', methods = ['GET', 'POST'])
 def start_date():
     # Get data from dropdown
@@ -76,7 +76,11 @@ def start_date():
     start_month = int(request.form.get("start-month"))
     start_day = int(request.form.get("start-day"))
     start_date = dt.date(year=start_year, month=start_month, day=start_day)
+    return redirect(f'/api/{start_date}')
     
+# Add start date into the route and load JSON of those dates
+@app.route('/api/<start_date>')
+def start(start_date):
     # Run query
     session = Session(engine)
     start = session.query(Measurement.date, func.min(Measurement.tobs), func.max(Measurement.tobs), func.avg(Measurement.tobs)).\
@@ -88,9 +92,9 @@ def start_date():
         dic_start[s[0]] = s[1]
     return jsonify(dic_start)
 
-
+# Retrive start and end date define by user
 @app.route('/end', methods = ['GET', 'POST'])
-def start_end():
+def end():
     # Get data from dropdown
     start_year = int(request.form.get("start-year"))
     start_month = int(request.form.get("start-month"))
@@ -101,7 +105,12 @@ def start_end():
     end_month = int(request.form.get("end-month"))
     end_day = int(request.form.get("end-day"))
     end_date = dt.date(year=end_year, month=end_month, day=end_day)
-        
+
+    return redirect(f'/api/{start_date}/{end_date}')
+
+# Add dates into the route and load JSON of those dates
+@app.route('/api/<start_date>/<end_date>')
+def start_end(start_date, end_date):
     session = Session(engine)
     end = session.query(Measurement.date, func.min(Measurement.tobs), func.max(Measurement.tobs), func.avg(Measurement.tobs)).\
             filter(Measurement.date >= start_date).\
