@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, render_template
+from flask import Flask, jsonify, render_template, request
 import numpy as np
 import pandas as pd
 import datetime as dt
@@ -69,10 +69,13 @@ def tobs():
         dic_lastyear[l[0]] = l[1]
     return jsonify(dic_lastyear)
 
-@app.route('/start_date', methods = ['POST'])
-def start_date:
-    track = request.form["song"]
-    artist = request.form["artist"]
+@app.route('/start_date', methods = ['GET', 'POST'])
+def start_date():
+    start_year = request.form.get("start-year")
+    start_month = request.form.get("start-month")
+    start_day = request.form.get("start-day")
+    print(start_year)
+    return (start_year)
 
 
 
