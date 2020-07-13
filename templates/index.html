@@ -37,18 +37,28 @@
             <div class='container'>
                 <div class="jumbotron">
                     <h1 class="display-3 text-center">Welcome to Hawaii Weather API!</h1>
-                    <h3>Checkout the available routes:</h3>
-                    <p class='lead'>
+                    <h3>Check out the weather before going surfing! <br> Available routes:</h3>
+                    <h5>
                         <ul>
                             <li><a href='/api/precipitation'>Precipitation</a></li>
                             <li><a href='/api/stations'>Stations</a></li>
-                            <li><a href='/api/tobs'>Tobs</a></li>
-                            <li>Weathern from specific start date
+                            <li><a href='/api/tobs'>TOBs</a></li>
+                            <li>Weathern from specific start date (Year/Month/Day)
                                 <form method="POST" action="/start">
                                     <div class="form-group">
                                         <div class='row'>
                                             <div class='col-lg-2'>
                                                 <label for="exampleSelect1">Year</label>
+                                            </div>
+                                            <div class='col-lg-2'>
+                                                <label for="exampleSelect1">Month</label>
+                                            </div>
+                                            <div class='col-lg-2'>
+                                                <label for="exampleSelect1">Day</label>
+                                            </div>
+                                        </div>
+                                        <div class='row'>
+                                            <div class='col-lg-2'>
                                                 <select class="form-control" id= 'start-year' name="start-year">
                                                     {% for y in range(2010, 2018) %}
                                                         {% if selected == y %}
@@ -60,7 +70,6 @@
                                                 </select>
                                             </div>
                                             <div class='col-lg-2'>
-                                                <label for="exampleSelect1">Month</label>
                                                 <select class="form-control" name="start-month">
                                                     {% for m in range(1, 13) %}
                                                         {% if selected == m %}
@@ -72,7 +81,6 @@
                                                 </select>
                                             </div>
                                             <div class='col-lg-2'>
-                                                <label for="exampleSelect1">Day</label>
                                                 <select class="form-control" name="start-day">
                                                     {% for d in range(1, 32) %}
                                                         {% if selected == d %}
@@ -88,12 +96,72 @@
                                     </div>
                                 </form>
                             </li>
-                            <!-- <li>End date
+                            <li>Weather from start date to end date
                                 <form method="POST" action="/end">
                                     <div class="form-group">
+                                        <p class='lead'>Start Date</p>
                                         <div class='row'>
                                             <div class='col-lg-2'>
                                                 <label for="exampleSelect1">Year</label>
+                                            </div>
+                                            <div class='col-lg-2'>
+                                                <label for="exampleSelect1">Month</label>
+                                            </div>
+                                            <div class='col-lg-2'>
+                                                <label for="exampleSelect1">Day</label>
+                                            </div>
+                                        </div>
+                                        <div class='row'>
+                                            <div class='col-lg-2'>
+                                                <select class="form-control" id= 'start-year' name="start-year">
+                                                    {% for y in range(2010, 2018) %}
+                                                        {% if selected == y %}
+                                                            <option value='{{y}}' selected='selected'>{{y}}</option>
+                                                        {% else %}
+                                                            <option value='{{y}}'>{{y}}</option>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                            <div class='col-lg-2'>
+                                                <select class="form-control" name="start-month">
+                                                    {% for m in range(1, 13) %}
+                                                        {% if selected == m %}
+                                                            <option value='{{m}}' selected='selected'>{{m}}</option>
+                                                        {% else %}
+                                                            <option value='{{m}}'>{{m}}</option>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                            <div class='col-lg-2'>
+                                                <select class="form-control" name="start-day">
+                                                    {% for d in range(1, 32) %}
+                                                        {% if selected == d %}
+                                                            <option value='{{d}}' selected='selected'>{{d}}</option>
+                                                        {% else %}
+                                                            <option value='{{d}}'>{{d}}</option>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <p class='lead'>End Date</p>
+                                        <div class='row'>
+                                            <div class='col-lg-2'>
+                                                <label for="exampleSelect1">Year</label>
+                                            </div>
+                                            <div class='col-lg-2'>
+                                                <label for="exampleSelect1">Month</label>
+                                            </div>
+                                            <div class='col-lg-2'>
+                                                <label for="exampleSelect1">Day</label>
+                                            </div>
+                                        </div>
+                                        <div class='row'>
+                                            <div class='col-lg-2'>
                                                 <select class="form-control" name="end-year">
                                                     {% for y in range(2010, 2018) %}
                                                         {% if selected == y %}
@@ -105,7 +173,6 @@
                                                 </select>
                                             </div>
                                             <div class='col-lg-2'>
-                                                <label for="exampleSelect1">Month</label>
                                                 <select class="form-control" name="end-month">
                                                     {% for m in range(1, 13) %}
                                                         {% if selected == m %}
@@ -117,7 +184,6 @@
                                                 </select>
                                             </div>
                                             <div class='col-lg-2'>
-                                                <label for="exampleSelect1">Day</label>
                                                 <select class="form-control" name="end-day">
                                                     {% for d in range(1, 32) %}
                                                         {% if selected == d %}
@@ -132,9 +198,9 @@
                                         </div>
                                     </div>
                                 </form>
-                            </li> -->
+                            </li>
                         </ul>
-                    </p>
+                    </h5>
                 </div>
             </div>
             <br>
