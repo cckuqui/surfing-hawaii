@@ -1,4 +1,4 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, render_template
 import numpy as np
 import pandas as pd
 import datetime as dt
@@ -21,18 +21,11 @@ Station = base.classes.station
 # Home page.
 @app.route("/")
 def welcome():
-    return (
-        f"Welcome to the weather API!<br/>"
-        f"Available Routes:<br/>"
-        f"/api/v1.0/precipitation<br/>"
-        f"/api/v1.0/stations<br/>"
-        f"/api/v1.0/tobs<br/>"
-        f'/api/v1.0/[start date in yyyy-mm-dd format]<br/>'
-        f'/api/v1.0/[start date in yyyy-mm-dd format]/[end date in yyyy-mm-dd format]<br/>')
+    return render_template("index.html")
 
 # Convert the query results to a dictionary using date as the key and prcp as the value.
 # Return the JSON representation of your dictionary.
-@app.route("/api/v1.0/precipitation")
+@app.route("/api/precipitation")
 def prcp():
     session = Session(engine)
     prcp = session.query(Measurement.date, Measurement.prcp).all()
@@ -44,7 +37,7 @@ def prcp():
     return jsonify(dic_prcp)
 
 # Return a JSON list of stations from the dataset.
-@app.route('/api/v1.0/stations')
+@app.route('/api/stations')
 def station():
     session = Session(engine)
     station = session.query(Station.station, Station.name).all()
@@ -57,7 +50,7 @@ def station():
 
 # Query the dates and temperature observations of the most active station for the last year of data.
 # Return a JSON list of temperature observations (TOBS) for the previous year.
-@app.route('/api/v1.0/tobs')
+@app.route('/api/tobs')
 def tobs():
     session = Session(engine)
     most_active = session.query(Measurement.station, func.count(Measurement.station)).\
@@ -79,7 +72,7 @@ def tobs():
 # Return a JSON list of the minimum temperature, the average temperature, and the max temperature for a given start or start-end range.
 # When given the start only, calculate TMIN, TAVG, and TMAX for all dates greater than and equal to the start date.
 # When given the start and the end date, calculate the TMIN, TAVG, and TMAX for dates between the start and end date inclusive.
-@app.route('/api/v1.0/<start_date>')
+@app.route('/api/<start_date>')
 def start(start_date):
     session = Session(engine)
     start = session.query(Measurement.date, func.min(Measurement.tobs), func.max(Measurement.tobs), func.avg(Measurement.tobs)).\
@@ -91,7 +84,7 @@ def start(start_date):
         dic_start[s[0]] = s[1]
     return jsonify(dic_start)
 
-@app.route('/api/v1.0/<start_date>/<end_date>')
+@app.route('/api/<start_date>/<end_date>')
 def start_end(start_date, end_date):
     session = Session(engine)
     end = session.query(Measurement.date, func.min(Measurement.tobs), func.max(Measurement.tobs), func.avg(Measurement.tobs)).\
