@@ -8,6 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <link rel="stylesheet" href="https://bootswatch.com/4/superhero/bootstrap.min.css" media="screen">
     <link rel="stylesheet" href="https://bootswatch.com/_assets/css/custom.min.css">
+    <link href="data:image/x-icon;base64,AAABAAEAEBAAAAAAAABoBQAAFgAAACgAAAAQAAAAIAAAAAEACAAAAAAAAAEAAAAAAAAAAAAAAAEAAAAAAACFZRwAxlkAALCcLwAeNjQA/8JoABdEMQAQJg4A88eAABIoCwCKXy4AnbdBAPPJhgDUr5MAQ1keAJ3c0gBzgToA1JxbAL6ofwAaTEAAcIxAAKi/NQDpt3UAACIMACUtCABscSYA4qlMAOSMGgA3PzQAGzwaAPDasABEQhkASUIQACU6FACk7+cAN1slAMmkUAAuOREAQ08lAK5wIgCPvV0A0qNNAPXLhACUaBQAHS0AAN2+eQDurm0Ahb2KABE6FQAAHA0A372IAK6WHwCtlSUA161iAPS7cADqwH8AlpBnAEE+KQBRPAgANkwvADA0AwCn5+sAV2YiAN2vaACPx5YAnLkuALKYLgCZtzoAjcalAP/BcAADMiIAt5U3ADxJQQDTpEgAx2MFAKmAHQBddB8A4LtxABYsEAD/lwYAhKygANanUQDHsGwA2KtUADU8LQAfKx8AACcLAK+ZFwCqlikAtcA6AJtwLQAVQx8A2Y83AMtJAAC9XgAAcpNgAN6wYwDAdj4AMioTAOarZgAcPDcAlWUNAKzq9QAPNA4AoLlBALRyIQDps2wA58BdAA8qJgDstmMApZYYADJhSwCbv1MAnZUwACIpCACZwWIAppMqANeKKQAyQDoA3qlYALJ8PwB4bR0A5ocgAKFxHwCrcR8AV145AJu3PADtmxQAqO/zALR1GQA/LBEAlL+2AKLb0wDSYQEAZjsQABOLVQAATCEA5Lt8AFlOHADAQggAACIQAL5wLgDzrR0AlsF+AJS2OgBeVyUAfGIzAMN4NAAAMRkAKzEYAJx7LACduJAA8cd8AA5vZQBFTCkA8KxZAKlXCQDBlzcA5MRrANagYwBpPQ4AWXNDAP++PgCQSgcADF1UADVmSgArTCoADmlCAA1aXQBmbzcApr5SAMV9DgCDVR8ACUgoABhgQgDHdyAATWU1AHBGFwAFKBoA0KBAANygJQCYuEEAo9fAAMJfDwBlikAAzFIMAHp4NwCjuTsAvZQ4AK7x8gD4xowAABwAABtPPQCJuoYA77pgAJHDawCdhk4Atfj1ALNYDQA2SB8A369JAMqUQQBFPhMAwnskALWYGACrmyoA/9eSAKPq5wB0YEEAJTsLADlFMQCubhAAam1NAJN2QwDQnUEAwaRfADOCVwA+QkMAFURBAEErCAAWNAAAXV1LAJTKrQAzXUwAxZA2AKKTJQAsRCYAzYY8AAyPZACzvS0ALE8jAKmaHwCVwHUAYVkTAKPFYABOPw4A45sYAMyfSACWt6IAqnwXAKK7MQCZvEYAWT8XANegSwDNq1EA6rBoALFQAABtmI8Am5UsAJ/DqwABUB8AJnZZAI63kQDaqV0ANEUqAIZgHwAANQ4Alvvt+IJPY/YOPM4hf7zEZanpcifC5zpejsAuP0PdtYPkWBRA7wolE7rwtEKPfWdvV0ECzDNwma9z9+AybVbL5vx2PjQQ1tN1I/NIGbLV8uxEwQfNvSw32M8xFWL0aTUEmlJMKZedEdxHHQtfbFDHoS02iJ4oagx84VG7nN8qSusJRo1+Gk6zGzh0oNTGsap5lE2rkllkAAMfPZgFK5HuyJtTVDmQpZNr2aOk/nqJ/6hd6sl4SyK/pxLRhdoIvhyVtheLJDv93m5aZnFFL7nDYEnS6NDxsNv5rKb647db4ne4hAH1xZ9VrTCH14YPyq5oilyiHoFh5RggFgYNeyaMgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=" rel="icon" type="image/x-icon" />
 </head>
 
     <style>
@@ -47,71 +48,32 @@
                                     <div class='row'>
                                         <div class='col-lg-2'>
                                             <label for="exampleSelect1">Year</label>
-                                            <select class="form-control" id="start-year">
-                                            <option>2010</option>
-                                            <option>2011</option>
-                                            <option>2012</option>
-                                            <option>2013</option>
-                                            <option>2014</option>
-                                            <option>2015</option>
-                                            <option>2016</option>
-                                            <option>2017</option>
+                                            <select class="form-control" id="start-year" name="start-year">
+                                                {% for y in range(2010, 2018) %}
+                                                    <option value='{{y}}'>{{y}}</option>
+                                                {% endfor %}
                                             </select>
+                                            <input type="submit">
                                         </div>
                                         <div class='col-lg-2'>
                                             <label for="exampleSelect1">Month</label>
-                                            <select class="form-control" id="start-month">
-                                            <option>01</option>
-                                            <option>02</option>
-                                            <option>03</option>
-                                            <option>04</option>
-                                            <option>05</option>
-                                            <option>06</option>
-                                            <option>07</option>
-                                            <option>08</option>
-                                            <option>09</option>
-                                            <option>10</option>
-                                            <option>11</option>
-                                            <option>12</option>
+                                            <select class="form-control" name="start-month">
+                                                {% for m in range(1, 13) %}
+                                                    <option>{{m}}</option>
+                                                {% endfor %}
                                             </select>
+                                            <input type="submit">
                                         </div>
                                         <div class='col-lg-2'>
                                             <label for="exampleSelect1">Day</label>
-                                            <select class="form-control" id="start-day">
-                                            <option>01</option>
-                                            <option>02</option>
-                                            <option>03</option>
-                                            <option>04</option>
-                                            <option>05</option>
-                                            <option>06</option>
-                                            <option>07</option>
-                                            <option>08</option>
-                                            <option>09</option>
-                                            <option>10</option>
-                                            <option>11</option>
-                                            <option>12</option>
-                                            <option>13</option>
-                                            <option>14</option>
-                                            <option>15</option>
-                                            <option>16</option>
-                                            <option>17</option>
-                                            <option>18</option>
-                                            <option>19</option>
-                                            <option>20</option>
-                                            <option>21</option>
-                                            <option>22</option>
-                                            <option>23</option>
-                                            <option>24</option>
-                                            <option>25</option>
-                                            <option>26</option>
-                                            <option>27</option>
-                                            <option>28</option>
-                                            <option>29</option>
-                                            <option>30</option>
-                                            <option>31</option>
+                                            <select class="form-control" name="start-day">
+                                                {% for d in range(1, 32) %}
+                                                    <option>{{d}}</option>
+                                                {% endfor %}
                                             </select>
+                                            <input type="submit">
                                         </div>
-                                        <button type="submit" class="btn btn-primary" id="start">Submit start date</button>
+                                        <button type="submit" class="btn btn-primary" name="start">Submit start date</button>
                                     </div>
                                 </div>
                             </li>
@@ -120,66 +82,29 @@
                                     <div class='row'>
                                         <div class='col-lg-2'>
                                             <label for="exampleSelect1">Year</label>
-                                            <select class="form-control" id="end-year">
-                                                {% for y in range(2010, 2017) %}
-                                                    <option>y</option>
+                                            <select class="form-control" name="end-year">
+                                                {% for y in range(2010, 2018) %}
+                                                    <option>{{y}}</option>
                                                 {% endfor %}
                                             </select>
                                         </div>
                                         <div class='col-lg-2'>
                                             <label for="exampleSelect1">Month</label>
-                                            <select class="form-control" id="end-month">
-                                            <option>01</option>
-                                            <option>02</option>
-                                            <option>03</option>
-                                            <option>04</option>
-                                            <option>05</option>
-                                            <option>06</option>
-                                            <option>07</option>
-                                            <option>08</option>
-                                            <option>09</option>
-                                            <option>10</option>
-                                            <option>11</option>
-                                            <option>12</option>
+                                            <select class="form-control" name="end-month">
+                                                {% for m in range(1, 13) %}
+                                                    <option>{{m}}</option>
+                                                {% endfor %}
                                             </select>
                                         </div>
                                         <div class='col-lg-2'>
                                             <label for="exampleSelect1">Day</label>
-                                            <select class="form-control" id="end-day">
-                                            <option>01</option>
-                                            <option>02</option>
-                                            <option>03</option>
-                                            <option>04</option>
-                                            <option>05</option>
-                                            <option>06</option>
-                                            <option>07</option>
-                                            <option>08</option>
-                                            <option>09</option>
-                                            <option>10</option>
-                                            <option>11</option>
-                                            <option>12</option>
-                                            <option>13</option>
-                                            <option>14</option>
-                                            <option>15</option>
-                                            <option>16</option>
-                                            <option>17</option>
-                                            <option>18</option>
-                                            <option>19</option>
-                                            <option>20</option>
-                                            <option>21</option>
-                                            <option>22</option>
-                                            <option>23</option>
-                                            <option>24</option>
-                                            <option>25</option>
-                                            <option>26</option>
-                                            <option>27</option>
-                                            <option>28</option>
-                                            <option>29</option>
-                                            <option>30</option>
-                                            <option>31</option>
+                                            <select class="form-control" name="end-day">
+                                                {% for d in range(1, 32) %}
+                                                    <option>{{d}}</option>
+                                                {% endfor %}
                                             </select>
                                         </div>
-                                        <button type="submit" class="btn btn-primary" id="end">Submit start & end date</button>
+                                        <button type="submit" class="btn btn-primary" name="end">Submit start & end date</button>
                                     </div>
                                 </div>
                             </li>
