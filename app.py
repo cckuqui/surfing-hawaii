@@ -69,21 +69,15 @@ def tobs():
         dic_lastyear[l[0]] = l[1]
     return jsonify(dic_lastyear)
 
-@app.route('/start_date', methods = ['GET', 'POST'])
+@app.route('/start', methods = ['GET', 'POST'])
 def start_date():
-    start_year = request.form.get("start-year")
-    start_month = request.form.get("start-month")
-    start_day = request.form.get("start-day")
-    print(start_year)
-    return (start_year)
-
-
-
-# Return a JSON list of the minimum temperature, the average temperature, and the max temperature for a given start or start-end range.
-# When given the start only, calculate TMIN, TAVG, and TMAX for all dates greater than and equal to the start date.
-# When given the start and the end date, calculate the TMIN, TAVG, and TMAX for dates between the start and end date inclusive.
-@app.route('/api/<start_date>')
-def start(start_date):
+    # Get data from dropdown
+    start_year = int(request.form.get("start-year"))
+    start_month = int(request.form.get("start-month"))
+    start_day = int(request.form.get("start-day"))
+    start_date = dt.date(year=start_year, month=start_month, day=start_day)
+    
+    # Run query
     session = Session(engine)
     start = session.query(Measurement.date, func.min(Measurement.tobs), func.max(Measurement.tobs), func.avg(Measurement.tobs)).\
             filter(Measurement.date >= start_date).\
@@ -94,8 +88,20 @@ def start(start_date):
         dic_start[s[0]] = s[1]
     return jsonify(dic_start)
 
-@app.route('/api/<start_date>/<end_date>')
-def start_end(start_date, end_date):
+
+@app.route('/end', methods = ['GET', 'POST'])
+def start_end():
+    # Get data from dropdown
+    start_year = int(request.form.get("start-year"))
+    start_month = int(request.form.get("start-month"))
+    start_day = int(request.form.get("start-day"))
+    start_date = dt.date(year=start_year, month=start_month, day=start_day)
+
+    end_year = int(request.form.get("end-year"))
+    end_month = int(request.form.get("end-month"))
+    end_day = int(request.form.get("end-day"))
+    end_date = dt.date(year=end_year, month=end_month, day=end_day)
+        
     session = Session(engine)
     end = session.query(Measurement.date, func.min(Measurement.tobs), func.max(Measurement.tobs), func.avg(Measurement.tobs)).\
             filter(Measurement.date >= start_date).\

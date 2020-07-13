@@ -43,71 +43,96 @@
                             <li><a href='/api/precipitation'>Precipitation</a></li>
                             <li><a href='/api/stations'>Stations</a></li>
                             <li><a href='/api/tobs'>Tobs</a></li>
-                            <li>Start date
-                                <div class="form-group">
-                                    <div class='row'>
-                                        <div class='col-lg-2'>
-                                            <label for="exampleSelect1">Year</label>
-                                            <select class="form-control" id="start-year" name="start-year">
-                                                {% for y in range(2010, 2018) %}
-                                                    <option value='{{y}}'>{{y}}</option>
-                                                {% endfor %}
-                                            </select>
-                                            <input type="submit">
+                            <li>Weathern from specific start date
+                                <form method="POST" action="/start">
+                                    <div class="form-group">
+                                        <div class='row'>
+                                            <div class='col-lg-2'>
+                                                <label for="exampleSelect1">Year</label>
+                                                <select class="form-control" id= 'start-year' name="start-year">
+                                                    {% for y in range(2010, 2018) %}
+                                                        {% if selected == y %}
+                                                            <option value='{{y}}' selected='selected'>{{y}}</option>
+                                                        {% else %}
+                                                            <option value='{{y}}'>{{y}}</option>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                            <div class='col-lg-2'>
+                                                <label for="exampleSelect1">Month</label>
+                                                <select class="form-control" name="start-month">
+                                                    {% for m in range(1, 13) %}
+                                                        {% if selected == m %}
+                                                            <option value='{{m}}' selected='selected'>{{m}}</option>
+                                                        {% else %}
+                                                            <option value='{{m}}'>{{m}}</option>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                            <div class='col-lg-2'>
+                                                <label for="exampleSelect1">Day</label>
+                                                <select class="form-control" name="start-day">
+                                                    {% for d in range(1, 32) %}
+                                                        {% if selected == d %}
+                                                            <option value='{{d}}' selected='selected'>{{d}}</option>
+                                                        {% else %}
+                                                            <option value='{{d}}'>{{d}}</option>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                            <input type="submit" class="btn btn-primary" value="Submit start date">
                                         </div>
-                                        <div class='col-lg-2'>
-                                            <label for="exampleSelect1">Month</label>
-                                            <select class="form-control" name="start-month">
-                                                {% for m in range(1, 13) %}
-                                                    <option>{{m}}</option>
-                                                {% endfor %}
-                                            </select>
-                                            <input type="submit">
-                                        </div>
-                                        <div class='col-lg-2'>
-                                            <label for="exampleSelect1">Day</label>
-                                            <select class="form-control" name="start-day">
-                                                {% for d in range(1, 32) %}
-                                                    <option>{{d}}</option>
-                                                {% endfor %}
-                                            </select>
-                                            <input type="submit">
-                                        </div>
-                                        <button type="submit" class="btn btn-primary" name="start">Submit start date</button>
                                     </div>
-                                </div>
+                                </form>
                             </li>
-                            <li>End date
-                                <div class="form-group">
-                                    <div class='row'>
-                                        <div class='col-lg-2'>
-                                            <label for="exampleSelect1">Year</label>
-                                            <select class="form-control" name="end-year">
-                                                {% for y in range(2010, 2018) %}
-                                                    <option>{{y}}</option>
-                                                {% endfor %}
-                                            </select>
+                            <!-- <li>End date
+                                <form method="POST" action="/end">
+                                    <div class="form-group">
+                                        <div class='row'>
+                                            <div class='col-lg-2'>
+                                                <label for="exampleSelect1">Year</label>
+                                                <select class="form-control" name="end-year">
+                                                    {% for y in range(2010, 2018) %}
+                                                        {% if selected == y %}
+                                                            <option value='{{y}}' selected='selected'>{{y}}</option>
+                                                        {% else %}
+                                                            <option value='{{y}}'>{{y}}</option>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                            <div class='col-lg-2'>
+                                                <label for="exampleSelect1">Month</label>
+                                                <select class="form-control" name="end-month">
+                                                    {% for m in range(1, 13) %}
+                                                        {% if selected == m %}
+                                                            <option value='{{m}}' selected='selected'>{{m}}</option>
+                                                        {% else %}
+                                                            <option value='{{m}}'>{{m}}</option>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                            <div class='col-lg-2'>
+                                                <label for="exampleSelect1">Day</label>
+                                                <select class="form-control" name="end-day">
+                                                    {% for d in range(1, 32) %}
+                                                        {% if selected == d %}
+                                                            <option value='{{d}}' selected='selected'>{{d}}</option>
+                                                        {% else %}
+                                                            <option value='{{d}}'>{{d}}</option>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                            <input type="submit" class="btn btn-primary" value="Submit start & end date">
                                         </div>
-                                        <div class='col-lg-2'>
-                                            <label for="exampleSelect1">Month</label>
-                                            <select class="form-control" name="end-month">
-                                                {% for m in range(1, 13) %}
-                                                    <option>{{m}}</option>
-                                                {% endfor %}
-                                            </select>
-                                        </div>
-                                        <div class='col-lg-2'>
-                                            <label for="exampleSelect1">Day</label>
-                                            <select class="form-control" name="end-day">
-                                                {% for d in range(1, 32) %}
-                                                    <option>{{d}}</option>
-                                                {% endfor %}
-                                            </select>
-                                        </div>
-                                        <button type="submit" class="btn btn-primary" name="end">Submit start & end date</button>
                                     </div>
-                                </div>
-                            </li>
+                                </form>
+                            </li> -->
                         </ul>
                     </p>
                 </div>
