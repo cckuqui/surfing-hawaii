@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Hawaii Weather API</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="stylesheet" href="https://bootswatch.com/4/superhero/bootstrap.min.css" media="screen">
+    <link rel="stylesheet" href="https://bootswatch.com/_assets/css/custom.min.css">
+</head>
+
+    <style>
+        body, html {
+            height: 100%;
+            }
+        
+        .bg { 
+            background-image: url("https://www.fodors.com/wp-content/uploads/2018/11/38_GoList_NorthAmerica_Hawaii_shutterstock_339637010.jpg");
+            height: auto; 
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            padding: 0 0;
+            }
+    </style>
+
+    <body>
+        <div class="bg fixed-top">
+            <br>
+            <div class='container'>
+                <div class="jumbotron">
+                    <h1 class="display-3 text-center">Welcome to Hawaii Weather API!</h1>
+                    <h3>Checkout the available routes:</h3>
+                    <p class='lead'>
+                        <ul>
+                            <li><a href='/api/precipitation'>Precipitation</a></li>
+                            <li><a href='/api/stations'>Stations</a></li>
+                            <li><a href='/api/tobs'>Tobs</a></li>
+                            <li>Start date
+                                <div class="form-group">
+                                    <div class='row'>
+                                        <div class='col-lg-4'>
+                                            <label for="exampleSelect1">Year</label>
+                                            <select class="form-control" id="year">
+                                            <option>1</option>
+                                            <option>2</option>
+                                            <option>3</option>
+                                            <option>4</option>
+                                            <option>5</option>
+                                            </select>
+                                        </div>
+                                        <div class='col-lg-4'>
+                                            <label for="exampleSelect1">Month</label>
+                                            <select class="form-control" id="month">
+                                            <option>1</option>
+                                            <option>2</option>
+                                            <option>3</option>
+                                            <option>4</option>
+                                            <option>5</option>
+                                            </select>
+                                        </div>
+                                        <div class='col-lg-4'>
+                                            <label for="exampleSelect1">Day</label>
+                                            <select class="form-control" id="day">
+                                            <option>1</option>
+                                            <option>2</option>
+                                            <option>3</option>
+                                            <option>4</option>
+                                            <option>5</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>/api/[start date in yyyy-mm-dd format]</li>
+                            <li>/api/[start date in yyyy-mm-dd format]/[end date in yyyy-mm-dd format]</li>
+                        </ul>
+                    </p>
+                </div>
+            </div>
+            <br>
+        </div>  
+    </body>
+
+    <div class="footer-copyright text-center py-3 fixed-bottom">
+        Site created by <a href='http://www.github.com/cckuqui'>Cristina Bardan</a> - Data BootCamp Tec de Monterrey
+    </div>
+
+
+    <script src="https://bootswatch.com/_vendor/jquery/dist/jquery.min.js"></script>
+    <script src="https://bootswatch.com/_vendor/popper.js/dist/umd/popper.min.js"></script>
+    <script src="https://bootswatch.com/_vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="https://bootswatch.com/_assets/js/custom.js"></script>
+    
+
+
+</html>
